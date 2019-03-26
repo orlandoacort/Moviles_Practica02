@@ -1,7 +1,6 @@
 package com.example.moviles_practica02;
 
 public class Contenidos {
-
         static  String[] titulos = {
                 "TOUR HISTÓRICO CULTURAL",
                 "CAMPIÑA Y ARQUEOLÓGICO" ,
@@ -108,5 +107,4 @@ public class Contenidos {
                         "Retorno: 5:30 PM\n" +
                         "Incluye: Movilidad y Guiado"
         };
-    }
-
+}
