@@ -1,5 +1,6 @@
 package com.example.moviles_practica02;
 
+
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
@@ -10,67 +11,60 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+
 public class TituloFragment extends ListFragment {
 
-    //interfaz definida
-    //comprobacion
-
-    OnTituloSelectedListener mCallback; // consulta de implementacion
+    OnTituloSelectedListener mCallBack;
 
 
-
-    public interface  OnTituloSelectedListener{
-        public void onTituloSelected(int position);
+    public TituloFragment() {
+        // Required empty public constructor
+    }
+    @Override
+    public void onListItemClick(ListView listView,View view,int position,long id){
+        mCallBack.onTituloSelected(position);
+        getListView().setItemChecked(position,true);
     }
 
     @Override
-    public void onListItemClick(ListView listView,
-                                View view,
-                                int position,
-                                long id){
-        mCallback.onTituloSelected(position);
-        getListView().setItemChecked(position, true);
-    }
-
-
-    @Override
-    public void onAttach(Context context){ //comprueba que la actividad es una actividad
+    public void onAttach(Context context){
         super.onAttach(context);
-      try{
-          Activity activity = (Activity) context;
-          mCallback = (OnTituloSelectedListener)activity;//casteamos y si se puede entonces esta esta implementada si no error
-      }catch (ClassCastException e){
 
-          throw  new ClassCastException(getActivity().toString() +
-                  "DEBE IMPLEMENTAR OnTituloSelectedLiestener");
-      }
+        try{
+            Activity activity =(Activity) context;
+            mCallBack=(OnTituloSelectedListener)activity;
 
+        }catch (ClassCastException e){
+            throw new ClassCastException(getActivity().toString()+" debe implementar el metodo OnTituloSelectedListener");
+        }
     }
 
-    @Override
-    public void onStart(){
-        super.onStart();
-        if(getFragmentManager().findFragmentById(R.id.fgm_parrafo) != null){
-            getListView().setChoiceMode(ListView.CHOICE_MODE_SINGLE);
-        }
+    public interface OnTituloSelectedListener{
+        public void onTituloSelected(int position);
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        setListAdapter(
-                new ArrayAdapter<String>(getActivity(),
-                        R.layout.support_simple_spinner_dropdown_item,
-        Contenidos.titulos));
+
+        setListAdapter(new ArrayAdapter<String>(getActivity(),R.layout.support_simple_spinner_dropdown_item,Contenido.Titulos));
+    }
+
+    @Override
+    public void onStart(){
+        super.onStart();
+
+        if(getFragmentManager().findFragmentById(R.id.fragment_parrafo)!=null){
+            getListView().setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+        }
     }
 
 
     @Override
-    public View onCreateView(LayoutInflater layoutInflater,
-                             ViewGroup viewGroup,
-                             Bundle savedInstanceState){
-
-        return layoutInflater.inflate(R.layout.fragment_titulo,
-                viewGroup,false);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_titulo, container, false);
     }
+
 }
