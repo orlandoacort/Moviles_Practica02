@@ -7,6 +7,7 @@ public class Contenido {
             "CATARATAS DE PANINA",
             "TURISMO VIVENCIAL CANDARAVE",
             "TOUR TACNA - ITE - ILO"};
+
     static String[] Parrafos = {"- Catedral\n" +
             "- Fuente Ornamental\n" +
             "- Arco Parabólico\n" +
